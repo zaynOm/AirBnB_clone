@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 "This module defines the BaseClass"
 from uuid import uuid4
-from datetime import datetime
+from datetime import datetime, date
 
 
 class BaseModel:
@@ -13,10 +13,18 @@ class BaseModel:
         updated_at (datetime): Datetime when instance is updated.
     """
 
-    def __init__(self):
-        self.id = str(uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = self.created_at
+    def __init__(self, *args, **kwargs):
+        if kwargs:
+            fmt = '%Y-%m-%dT%H:%M:%S.%f'
+            for k, v in kwargs.items():
+                if k in ['created_at', 'updated_at']:
+                    setattr(self, k, datetime.strptime(v, fmt))
+                elif k != '__class__':
+                    setattr(self, k, v)
+        else:
+            self.id = str(uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = self.created_at
 
     def __str__(self):
         "Returns the string representation of an instance"
