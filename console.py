@@ -3,6 +3,11 @@
 import cmd
 from models.base_model import BaseModel
 from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 from models import storage
 
 
@@ -10,7 +15,8 @@ class HBNBCommand(cmd.Cmd):
     ""
 
     prompt = '(hbnb) '
-    cls_names = ['BaseModel', 'User']
+    cls_names = ['BaseModel', 'User', 'State', 'City',
+                 'Amenity', 'Place', 'Review']
 
     def do_quit(self, line):
         "Quit command to exit the program"
@@ -27,7 +33,14 @@ class HBNBCommand(cmd.Cmd):
     def do_create(self, line):
         ""
         if self.validate_input(line):
-            classes = {'BaseModel': BaseModel, 'User': User}
+            classes = {'BaseModel': BaseModel,
+                       'User': User,
+                       'State': State,
+                       'City': City,
+                       'Amenity': Amenity,
+                       'Place': Place,
+                       'Review': Review}
+
             obj = classes[line]()
             storage.save()
             print(obj.id)
