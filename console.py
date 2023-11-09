@@ -5,9 +5,10 @@ from models.base_model import BaseModel
 from models.user import User
 from models import storage
 
+
 class HBNBCommand(cmd.Cmd):
     ""
-    
+
     prompt = '(hbnb) '
     cls_names = ['BaseModel', 'User']
 
@@ -87,8 +88,6 @@ class HBNBCommand(cmd.Cmd):
             print('** value missing **')
             return False
         return True
-        
-        
 
 
 if __name__ == '__main__':
