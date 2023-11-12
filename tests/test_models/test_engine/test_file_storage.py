@@ -58,6 +58,13 @@ class TestFileStorage(unittest.TestCase):
         self.assertIn(self.getKey(bm1), self.objs)
         self.assertEqual(data[self.key], self.objs[self.key].to_dict())
 
+    def test_path(self):
+        "Test the existence of the JSON file"
+        if os.path.exists(self.file_path):
+            os.remove(self.file_path)
+        self.assertFalse(os.path.exists(self.file_path))
+        storage.reload()
+
 
 if __name__ == '__main__':
     unittest.main()
