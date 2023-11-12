@@ -49,6 +49,13 @@ class TestBaseModel(unittest.TestCase):
                          self.bm.updated_at.isoformat())
         self.assertEqual(self.bm.to_dict().get('id'), self.bm.id)
 
+    def test_create_obj_using_kwargs(self):
+        bm1 = BaseModel(**self.bm.to_dict())
+        self.assertEqual(bm1.to_dict(), self.bm.to_dict())
+        self.assertEqual(bm1.id, self.bm.id)
+        self.assertFalse(bm1 is self.bm)
+        self.assertTrue(type(bm1.created_at), datetime)
+
 
 if __name__ == '__main__':
     unittest.main()
