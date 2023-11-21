@@ -53,6 +53,8 @@
     margin-left: -50px;
     padding: 50px;
     list-style-type: none;
+    z-index: 5;
+    position: relative;
 }
 
 .locations:hover .popover,
